@@ -25,7 +25,7 @@ from django.core.management.commands.loaddata import Command
 from django.db import connections, transaction, DEFAULT_DB_ALIAS
 from django.test.runner import DiscoverRunner
 
-from django_nose.plugin import DjangoSetUpPlugin, ResultPlugin, TestReorderer
+from django_nose.plugin import DjangoSetUpPlugin, ResultPlugin, DatabaseSetUpPlugin
 from django_nose.utils import uses_mysql
 import nose.core
 
@@ -46,8 +46,7 @@ def translate_option(opt):
 
 
 def _get_plugins_from_settings():
-    plugins = (list(getattr(settings, 'NOSE_PLUGINS', [])) +
-               ['django_nose.plugin.TestReorderer'])
+    plugins = list(getattr(settings, 'NOSE_PLUGINS', []))
     for plug_path in plugins:
         try:
             dot = plug_path.rindex('.')
@@ -232,12 +231,12 @@ class BasicNoseRunner(BaseRunner):
     def run_suite(self, nose_argv):
         """Run the test suite."""
         result_plugin = ResultPlugin()
-        plugins_to_add = [DjangoSetUpPlugin(self),
-                          result_plugin,
-                          TestReorderer()]
+        plugins_to_add = [DjangoSetUpPlugin(self), result_plugin]
 
         for plugin in _get_plugins_from_settings():
             plugins_to_add.append(plugin)
+
+        plugins_to_add.append(DatabaseSetUpPlugin(self))
 
         setup()
 
