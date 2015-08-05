@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+*Unreleased*
+~~~~~~~~~~~~
+* Add support for custom database contexts.
+
 1.4.4 (2016-06-27)
 ~~~~~~~~~~~~~~~~~~
 * Add Django 1.10 support
