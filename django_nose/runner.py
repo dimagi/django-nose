@@ -25,7 +25,8 @@ from django.core.management.commands.loaddata import Command
 from django.db import connections, transaction, DEFAULT_DB_ALIAS
 from django.test.runner import DiscoverRunner
 
-from django_nose.plugin import DjangoSetUpPlugin, ResultPlugin, DatabaseSetUpPlugin
+from django_nose.plugin import DjangoSetUpPlugin, ResultPlugin
+from django_nose.plugin import DatabaseSetUpPlugin
 from django_nose.utils import uses_mysql
 import nose.core
 
