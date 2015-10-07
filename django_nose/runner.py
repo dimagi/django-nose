@@ -25,8 +25,8 @@ from django.core.management.commands.loaddata import Command
 from django.db import connections, transaction, DEFAULT_DB_ALIAS
 from django.test.runner import DiscoverRunner
 
-from django_nose.plugin import DjangoSetUpPlugin, ResultPlugin
 from django_nose.plugin import DatabaseSetUpPlugin
+from django_nose.plugin import DjangoSetUpPlugin, ResultPlugin
 from django_nose.utils import uses_mysql
 import nose.core
 
@@ -228,12 +228,14 @@ class BasicNoseRunner(BaseRunner):
     def run_suite(self, nose_argv):
         """Run the test suite."""
         result_plugin = ResultPlugin()
-        plugins_to_add = [DjangoSetUpPlugin(self), result_plugin]
+        plugins_to_add = [
+            DjangoSetUpPlugin(self),
+            DatabaseSetUpPlugin(self),
+            result_plugin,
+        ]
 
         for plugin in _get_plugins_from_settings():
             plugins_to_add.append(plugin)
-
-        plugins_to_add.append(DatabaseSetUpPlugin(self))
 
         setup()
 
