@@ -137,6 +137,7 @@ class BaseRunner(DiscoverRunner):
         manager = nose.core.DefaultPluginManager()
         config = nose.core.Config(
             env=os.environ, files=cfg_files, plugins=manager)
+        config.plugins.addPlugin(DatabaseSetUpPlugin(None))
         config.plugins.addPlugins(list(_get_plugins_from_settings()))
         options = config.getParser()._get_all_options()
 
