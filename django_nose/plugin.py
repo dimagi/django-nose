@@ -7,7 +7,6 @@ from itertools import groupby
 from types import ModuleType
 
 from nose.plugins.base import Plugin
-from nose.plugins.skip import SkipTest
 from nose.suite import ContextSuite
 
 from django.test.testcases import TransactionTestCase, TestCase
@@ -268,10 +267,10 @@ class DatabaseSetUpPlugin(AlwaysOnPlugin):
                 if len(filth) == 1:
                     return filth.pop()
                 for const in [
-                        self.DIRTY_TESTS,
-                        self.CLEAN_TESTS,
-                        self.FFTC_TESTS,  # will be bundled in remainder bucket
-                    ]:
+                    self.DIRTY_TESTS,
+                    self.CLEAN_TESTS,
+                    self.FFTC_TESTS,  # will be bundled in remainder bucket
+                ]:
                     if const in filth:
                         return const
             return self.NON_DB_TESTS
@@ -350,7 +349,8 @@ class DatabaseSetUpPlugin(AlwaysOnPlugin):
         if self.skip_non_db_tests:
             test_groups.pop(self.NON_DB_TESTS, None)
             sys.__stdout__.write('skipped non-database tests\n')
-        elif self.non_db_test_context_path and self.NON_DB_TESTS in test_groups:
+        elif self.non_db_test_context_path \
+                and self.NON_DB_TESTS in test_groups:
             # setup context for non-database tests
             non_db_tests = test_groups.pop(self.NON_DB_TESTS)
             context = get_test_context(
@@ -375,7 +375,6 @@ class DatabaseSetUpPlugin(AlwaysOnPlugin):
 
 
 class _DatabaseSetupTestRunner(object):
-
     """A test runner that groups tests by database setup.
 
     This is a helper class that reorders tests for efficient database
@@ -407,7 +406,6 @@ def get_test_context(context_path, tests, runner):
 
 
 class DatabaseContext(object):
-
     """A context that performs standard Django database setup/teardown."""
 
     def __init__(self, tests, runner):
@@ -430,7 +428,6 @@ class DatabaseContext(object):
 
 
 class NullContext(object):
-
     """A context that does nothing."""
 
     def __init__(self, tests, runner):
