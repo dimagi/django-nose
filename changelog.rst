@@ -5,6 +5,10 @@ Changelog
 ~~~~~~~~~~~~
 * Add support for custom database contexts.
 
+1.4.6.1 (informal release for commcare-hq)
+~~~~~~~~~~~~~~~~~~
+* Features for commcare-hq tests (see git commits for more details)
+
 1.4.6 (2018-10-03)
 ~~~~~~~~~~~~~~~~~~
 * Document Django 2.0 and 2.1 support, no changes needed
