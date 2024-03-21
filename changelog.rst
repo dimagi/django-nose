@@ -1,7 +1,7 @@
 Changelog
 ---------
 
-*Unreleased*
+1.4.6.2  (2024-03-21)
 ~~~~~~~~~~~~
 * Add support for custom database contexts.
 * Depend on pynose instead of nose
