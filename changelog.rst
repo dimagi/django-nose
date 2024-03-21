@@ -4,6 +4,7 @@ Changelog
 *Unreleased*
 ~~~~~~~~~~~~
 * Add support for custom database contexts.
+* Depend on pynose instead of nose
 
 1.4.6.1 (informal release for commcare-hq)
 ~~~~~~~~~~~~~~~~~~
